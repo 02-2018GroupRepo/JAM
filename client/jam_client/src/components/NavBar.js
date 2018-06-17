@@ -16,13 +16,13 @@ class NavBar extends Component{
 						<div className="navbar-header">
 							{loggedIn == undefined
 								?
-								<Link to="/" className="navbar-brand">JAM</Link>
+								<Link to="/" className="navbar-brand navLogo">JAM</Link>
 								:
 								<Logout />
 							}
 						</div>
 					</div>
-				</nav>			
+				</nav>
 			</div>
 			)
 	}

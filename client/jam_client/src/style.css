@@ -35,7 +35,7 @@ label.active{
   background-position: center;
   background-repeat: no-repeat;
 	background-size: cover;
-	
+
 } */
 body {
 	min-height: 100vh;
@@ -49,11 +49,11 @@ body {
  left: 0;
  width: 100vw;
  height: 100vh;
-	background-image: url(/image_1.jpg);    
+	background-image: url(/image_1.jpg);
  background-position: center;
  background-repeat: no-repeat;
 	background-size: cover;
-	background-image:  url("/image_1.jpg");    
+	background-image:  url("/image_1.jpg");
 }
 /* .login{
 	position: absolute;
@@ -65,7 +65,7 @@ body {
 	box-sizing: border-box;
 	background: rgba(0, 0, 0, .7);
 	} */
-	
+
   .loginRegisterWindow{
 	position: absolute;
 	top: 50%;
@@ -142,3 +142,6 @@ p{
 	border: black 2px solid;
 }
 
+.navLogo{
+	font-family: 'Orbitron', sans-serif;
+}
