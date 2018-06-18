@@ -1,3 +1,4 @@
+html,body,#root,.App { height:100%; }
 
 .jobs-list{
 	list-style-type: none;
@@ -30,43 +31,22 @@ label.active{
 }
 
 
-/* body {
-	min-height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-	background-size: cover;
-	
-} */
-body {
-	min-height: 100vh;
-	position: relative;
-	background-color: cornsilk;
+.bgbody{
+	 position: fixed;
+	 top: 50px;
+	 left: 0;
+	 width: 100vw;
+	 height: 100vh;
+	 background-image: url(/image_1.jpg);    
+	 background-position: center;
+	 background-repeat: no-repeat;
+	 background-size: cover;  
+	 margin: 0; 
+	 height: 100%; 
+ 	overflow: hidden
 }
 
-.bgbody{
- position: absolute;
- top: 50px;
- left: 0;
- width: 100vw;
- height: 100vh;
-	background-image: url(/image_1.jpg);    
- background-position: center;
- background-repeat: no-repeat;
-	background-size: cover;
-	background-image:  url("/image_1.jpg");    
-}
-/* .login{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 350px;
-	height: 420px;
-	box-sizing: border-box;
-	background: rgba(0, 0, 0, .7);
-	} */
-	
-  .loginRegisterWindow{
+.loginRegisterWindow{
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -78,7 +58,7 @@ body {
   }
 
 .loginRegisterH1{
-color: aliceblue;
+	color: aliceblue;
 }
 .loginRegisterLabel{
 	color: aliceblue;
@@ -87,7 +67,7 @@ color: aliceblue;
 	margin-top: 30px;
 }
 p{
-	 color: aliceblue;
+	color: aliceblue;
 }
 
 .jumbotron{
@@ -102,9 +82,9 @@ p{
 }
 
 .loginInput{
-		width: 85%;
+	width: 85%;
     height: 34px;
-		padding: 6px 12px;
+	padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
@@ -138,7 +118,58 @@ p{
 	float:right;
 }
 
+#jumboJob{
+	opacity: 0.8;
+}
+
 #jumboJob:hover{
+	color: black;
+	opacity: 1.0;
 	border: black 2px solid;
 }
 
+.navLogo{
+	font-family: 'Bungee Inline', cursive;
+}
+
+.main-jobs{
+	position: inherit;
+	top: 50px;
+	left: 0;
+	width: 100%;
+	background-image: url(/image_2.jpg);    
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;  
+	margin: 0;  
+	height: 106%;
+}
+.navbar{
+	margin-bottom: 0px;
+}
+
+.jobs-list{
+	padding-right: 20px;
+	padding-top: 20px;
+}
+
+.jobs-list ul{
+	list-style-type: none;
+}
+
+@media only screen and (max-width: 991px) {
+	.jobs-list{
+		width: 100%;
+		background-image: url(/image_2.jpg);    
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;  
+  }
+	.main-jobs{
+
+		left: 0;
+		width: 100%; 
+		margin: 0;  
+		height: 100%;
+	}
+}

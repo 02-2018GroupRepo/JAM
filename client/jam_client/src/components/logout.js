@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Glyphicon, NavItem } from 'react-bootstrap';
+import { Glyphicon, Navbar, Nav} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 
 class Logout extends Component{
@@ -16,9 +16,11 @@ class Logout extends Component{
 
 	render(){
 		return(
-			<Link to="/" id="logout" onClick={this.logout} className="navbar-brand">
-				<Glyphicon glyph="log-out"/> Logout
-			</Link>
+			<Nav pullRight>
+				<Navbar.Link href="/" id="logout" onClick={this.logout} className="navbar-brand">
+					<Glyphicon glyph="log-out"/> Logout
+				</Navbar.Link>
+			</Nav>
 		)
 	}
 }

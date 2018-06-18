@@ -22,9 +22,9 @@ class Jobs extends Component{
 			}
 		});
 		getToken.then((jobData)=>{
-			setTimeout(300);
+			// setTimeout(300);
 			// debugger
-			console.log(jobData)
+			// console.log(jobData)
 			 // console.log("are there jobss",jobData.data);
 			 // console.log(jobData.data[0].customer.id)
 			this.setState({
@@ -34,12 +34,12 @@ class Jobs extends Component{
 	}
 
 	formatTime(time){
-		console.log(time)
+		// console.log(time)
 		let date = new Date(time);
-		let dateTime = (date.toString().split(" GMT"))
+		let dateTime = (date.toString().split(" GMT")[0].slice(0, -3))
 		return(
 			<div>
-			{dateTime[0]}
+			{dateTime}
 			</div>
 		)
 	}
@@ -48,30 +48,32 @@ class Jobs extends Component{
 
 	render(){
 		// col-lg-2 col-md-2 col-xl-12 col-sm-4 
-		// console.log(this.state.jobs)
 		const jobs = this.state.jobs.map((data, index)=>{
-			return(
-				<li>
-					<div className="container">
-						<div className="row justify-content-md-center">
-							<Link to={`/job/${data.id}`}  >
-								<div id="jumboJob" className="jumbotron col-md-6 col-md-offset-3 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3">
-									<h2> Job# {data.id} </h2>
-									<hr />
-									<h4> Time: {this.formatTime(data.time)} </h4>
-									<h4> Description: {data.description} </h4>
-								</div>
-							</Link>
-						</div>
-					</div>
-				</li>
-			)
+			if(data != undefined){
+				const customer = data.customer
+				console.log(customer)
+				return(
+					<li className="col-md-4">
+						<Link to={`/job/${data.id}`}  >
+							<div id="jumboJob" className="jumbotron">
+								<h3> Job# {data.id} </h3>
+								<hr />
+								<h4>Customer: </h4>
+								<h4>{this.formatTime(data.time)} </h4>
+								<h4> Description: {data.description} </h4>
+							</div>
+						</Link>
+					</li>
+				)
+			}
 		})
 		
 		return(
-			<div className="container2">
+			<div className="container2 main-jobs">
 				<div className="jobs-list">
-					{jobs}
+					<ul className="row">
+						{jobs}
+					</ul>
 				</div>
 			</div>
 		)
