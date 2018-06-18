@@ -51,16 +51,26 @@ class Jobs extends Component{
 		const jobs = this.state.jobs.map((data, index)=>{
 			if(data != undefined){
 				const customer = data.customer
-				console.log(customer)
+				// console.log(customer.id)
 				return(
-					<li className="col-md-4">
+					<li className="col-md-3">
 						<Link to={`/job/${data.id}`}  >
 							<div id="jumboJob" className="jumbotron">
-								<h3> Job# {data.id} </h3>
+								<h3 className="jumboTitle"> Job# {data.id} </h3>
 								<hr />
-								<h4>Customer: </h4>
-								<h4>{this.formatTime(data.time)} </h4>
-								<h4> Description: {data.description} </h4>
+								{customer != undefined
+									?
+									<span className="jumboText">
+										<h5>Customer: {customer.last_name}, {customer.first_name}</h5>
+										<h5>Address: {customer.address}</h5>
+										<h5>Phone: {customer.phone}</h5>
+										<h5>Email: {customer.email}</h5>
+										<h5>{this.formatTime(data.time)} </h5>
+										<h5> Description: {data.description} </h5>
+									</span>
+									:
+									<span></span>
+								}
 							</div>
 						</Link>
 					</li>
