@@ -20,8 +20,8 @@ public class JobService {
 	private EmailConfig config;
 
 
-	public void createJob(Job job){
-		jobRepo.save(job);
+	public Job createJob(Job job){
+		return jobRepo.save(job);
 	}
 	
 	public List<Job> findUserJobs(Long userId){
@@ -40,10 +40,10 @@ public class JobService {
         System.out.println(userEmail);
 		config.emails(userEmail,jobId,Description);
 	}
-	public void updateJob(Long jobId,String description) {
+	public void updateJob(Long jobId) {
 		Job completedJob = jobRepo.findJobById(jobId);
 		completedJob.setCompleted(true);
-		completedJob.setDescription(description);
+
 		jobRepo.save(completedJob);
 		
 	}

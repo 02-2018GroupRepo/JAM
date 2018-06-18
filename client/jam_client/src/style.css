@@ -159,6 +159,11 @@ a:hover{
 .jobs-list{
 	padding-right: 20px;
 	padding-top: 20px;
+	width: 100%;
+	background-image: url(/image_2.jpg);    
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;  
 }
 
 .jobs-list ul{

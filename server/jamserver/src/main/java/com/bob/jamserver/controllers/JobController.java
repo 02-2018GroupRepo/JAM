@@ -1,6 +1,5 @@
 package com.bob.jamserver.controllers;
 
-import com.bob.jamserver.model.Customer;
 import com.bob.jamserver.model.Job;
 import com.bob.jamserver.model.User;
 import com.bob.jamserver.services.CustomerService;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -26,11 +23,10 @@ public class JobController{
 	CustomerService customerService;
 
 	@RequestMapping(value="/create/job", method = RequestMethod.POST)
-	public void create(@RequestBody Customer customer, Job job){
-		customerService.createCustomer(customer);
-		job.setCustomer(customer);
-		jobService.createJob(job);
-		System.out.println("leaving create Job");
+	public void create(@RequestBody  Job job){
+		System.out.println("just ot create Job"+job.getTime());
+		Job jobcreate = jobService.createJob(job);
+		System.out.println("check if Job is null "+jobcreate.getDescription());
 	}
 	@RequestMapping(value="/customer", method=RequestMethod.POST)
 	public Job getCustomerForJob(@RequestBody Job job) {
@@ -50,13 +46,13 @@ public class JobController{
 
 		Long jobId = job.getId();
 
-		Date time = job.getTime();
+
 		String jobDescription = job.getDescription();
 		System.out.println("job desc"+ jobDescription);
-		jobService.updateJob(jobId,jobDescription);
+		jobService.updateJob(jobId);
 		System.out.println(userEmail);
-		jobService.emailConfirmation(userEmail,jobId,jobDescription);
-		List<Job> uncompletedJobs = jobService.jobsTodo(userId);
+//		jobService.emailConfirmation(userEmail,jobId,jobDescription);
+
 
 
 	}

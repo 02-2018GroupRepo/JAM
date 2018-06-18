@@ -9,6 +9,7 @@ class Jobs extends Component{
 		super();
 		this.state={
 			jobs: [""],
+			user:"",
 			token: localStorage.getItem('token')
 		}
 		this.handleJob = this.handleJob.bind(this);
@@ -29,7 +30,8 @@ class Jobs extends Component{
 			 // console.log("are there jobss",jobData.data);
 			 // console.log(jobData.data[0].customer.id)
 			this.setState({
-				jobs: jobData.data
+				jobs: jobData.data,
+				user : jobData.data[0].user
 			})
 		})
 	}
@@ -54,11 +56,33 @@ class Jobs extends Component{
 		const email = document.getElementById("email").value;
 		const time = document.getElementById("date").value.toString();
 		const description = document.getElementById("description").value;
+		const user = this.state.user;
 
+		console.log(this.state.customer);
 		const jobRequest = axios({
-			method:"POST"
+			method:"POST",
+			url: url.url + "create/customer",
+			data:{
+				first_name,
+				last_name,
+				address,
+				phone,
+				email
+			}
+			
 		})
+		jobRequest.then((newJobData)=>{
+				console.log(newJobData);
+			axios({
+				method:"POST",
+				url:url.url+ "create/job",
+				data:{
+					customer_id:newJobData.id,
+					user:this.state.user
+				}
+			})
 
+			})
 	}
 
 
@@ -102,7 +126,38 @@ class Jobs extends Component{
 						{jobs}
 					</ul>
 				</div>
-			
+					<form onSubmit={this.handleJob}>
+					  <div class="form-group">
+					    <label for="first_name">Customer First Name:</label>
+					    <input type="text" class="form-control" id="fname"/>
+					  </div>
+					  <div class="form-group">
+					    <label for="last_name">Customer Last Name:</label>
+					    <input type="text" class="form-control" id="lname"/>
+					  </div>
+					   <div class="form-group">
+					    <label for="email">Customer Email:</label>
+					    <input type="email" class="form-control" id="email"/>
+					  </div>
+					   <div class="form-group">
+					    <label for="address">Address:</label>
+					    <input type="text" class="form-control" id="address"/>
+					  </div>
+					  <div class="form-group">
+					    <label for="phone">Phone:</label>
+					    <input type="text" class="form-control" id="phone"/>
+					  </div>
+					  <div class="form-group">
+					    <label for="description">Description:</label>
+					    <input type="text" class="form-control" id="description"/>
+					  </div>
+					  <div class="form-group">
+					    <label for="date">Date:</label>
+					    <input type="datetime-local" class="form-control" id="date"/>
+					  </div>
+					  
+					  <button type="submit" class="btn btn-default">Submit</button>
+				</form>
 			
 				
 			</div>
