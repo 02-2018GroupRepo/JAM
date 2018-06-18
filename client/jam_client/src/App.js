@@ -22,7 +22,7 @@ class App extends Component {
           <Route exact path = "/register" component={Register}/>  
           <Route exact path = "/jobs" component={Jobs} />
           <Route path="/job/:job_id" component={SingleJob} />
-          <Route exact path = "/logout" component={Logout} />    
+          <Route exact path = "/Logout" component={Logout} />    
         </div>
       </BrowserRouter>
     );

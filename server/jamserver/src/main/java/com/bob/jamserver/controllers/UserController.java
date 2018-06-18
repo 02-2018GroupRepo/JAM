@@ -49,8 +49,10 @@ public class UserController {
 		if(userService.checkEmailExists(user.getEmail())){
 			if(userService.authenticateUser(user.getEmail(),user.getPassword())) {
 				String token = userService.updateToken(user.getEmail());
-				System.out.println("user exists");
+				User currentUser = userService.findByToken(token);
+//				System.out.println("user exists");
 				data.put("token",token);
+				data.put("user", currentUser.getFirst_name());
 
 				data.put("msg", "LoginSuccessful" );
 				return data;
