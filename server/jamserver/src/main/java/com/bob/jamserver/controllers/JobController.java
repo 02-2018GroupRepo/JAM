@@ -1,7 +1,9 @@
 package com.bob.jamserver.controllers;
 
+import com.bob.jamserver.model.Customer;
 import com.bob.jamserver.model.Job;
 import com.bob.jamserver.model.User;
+import com.bob.jamserver.services.CustomerService;
 import com.bob.jamserver.services.JobService;
 import com.bob.jamserver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,17 @@ public class JobController{
 	
 	@Autowired
 	UserService userService;
-	
+
+	@Autowired
+	CustomerService customerService;
+
+	@RequestMapping(value="/create/job", method = RequestMethod.POST)
+	public void create(@RequestBody Customer customer, Job job){
+		customerService.createCustomer(customer);
+		job.setCustomer(customer);
+		jobService.createJob(job);
+		System.out.println("leaving create Job");
+	}
 	@RequestMapping(value="/customer", method=RequestMethod.POST)
 	public Job getCustomerForJob(@RequestBody Job job) {
 		

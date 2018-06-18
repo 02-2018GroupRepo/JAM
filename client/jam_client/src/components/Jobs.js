@@ -11,6 +11,7 @@ class Jobs extends Component{
 			jobs: [""],
 			token: localStorage.getItem('token')
 		}
+		this.handleJob = this.handleJob.bind(this);
 	}
 
 	componentDidMount(){
@@ -42,6 +43,22 @@ class Jobs extends Component{
 			{dateTime}
 			</div>
 		)
+	}
+
+	handleJob(event){
+		event.preventDefault();
+		const first_name = document.getElementById("fname").value;
+		const last_name = document.getElementById("lname").value;
+		const address = document.getElementById("address").value;
+		const phone = document.getElementById("phone").value;
+		const email = document.getElementById("email").value;
+		const time = document.getElementById("date").value.toString();
+		const description = document.getElementById("description").value;
+
+		const jobRequest = axios({
+			method:"POST"
+		})
+
 	}
 
 
@@ -85,7 +102,11 @@ class Jobs extends Component{
 						{jobs}
 					</ul>
 				</div>
+			
+			
+				
 			</div>
+			
 		)
 	}
 } 
