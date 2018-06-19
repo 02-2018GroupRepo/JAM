@@ -3,6 +3,7 @@ import axios from 'axios';
 import url from '../url';
 import {Link} from 'react-router-dom';
 import SingleJob from './SingleJob';
+import {Button, ButtonToolbar} from 'react-bootstrap';
 
 class Jobs extends Component{
 	constructor(){
@@ -120,6 +121,10 @@ class Jobs extends Component{
 		
 		return(
 			<div className="container2 main-jobs">
+				<ButtonToolbar>
+			  		<Button bsStyle="primary" bsSize="large">Assigned Jobs</Button>
+			  		<Button bsStyle="success" bsSize="large">Completed Jobs</Button>	
+				</ButtonToolbar>
 				<div className="jobs-list">
 					<ul className="row">
 						{jobs}

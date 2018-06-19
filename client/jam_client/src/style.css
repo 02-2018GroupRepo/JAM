@@ -195,3 +195,7 @@ a:hover{
 .jumboText{
 	text-align: left;
 }
+
+.btn-toolbar {
+    margin-left: 30px;
+}
