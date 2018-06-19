@@ -68,7 +68,7 @@ class DoorEdit extends Component{
 					}
 				});
 			updateDoor.then(data =>{
-				console.log(data)
+				// console.log(data)
 				this.props.updateDoor(data);
 				document.getElementById(`doorModal` + this.props.index).click()
 				// console.log(data)
