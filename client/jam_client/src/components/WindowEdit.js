@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Glyphicon, FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 import url from '../url';
+import swal from 'sweetalert';
+
 
 class WindowEdit extends Component{
 	constructor(){
@@ -36,26 +38,46 @@ class WindowEdit extends Component{
 		const color = document.getElementById(`windowColor${this.props.index}`).value;
 		const type = document.getElementById(`windowType${this.props.index}`).value;
 		
-		const updateWindow = axios({
-			method: "POST",
-			url: url.url + "edit/window",
-			data:{
-				id,
-				job,
-				type,
-				color,
-				height,
-				width,
-				quantity,
+		swal({
+			title: "Edit Cabinet?",
+			text: "Are you sure you want to save changes",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willEdit) => {
+			if (willEdit) {
+				const updateWindow = axios({
+					method: "POST",
+					url: url.url + "edit/window",
+					data:{
+						id,
+						job,
+						type,
+						color,
+						height,
+						width,
+						quantity,
+					}
+				});
+				updateWindow.then(data =>{
+					// console.log(data)
+					this.props.updateWindow(data);
+					document.getElementById(`windowModal` + this.props.index).click()
+					// console.log(data)
+					// debugger
+				});
+				swal("Your cabinet has been edited!", {
+					icon: "success",
+				});
+			} 
+			else {
+				swal("Your cabinet is unchanged!");
 			}
 		});
-		updateWindow.then(data =>{
-			// console.log(data)
-			this.props.updateWindow(data);
-			document.getElementById(`windowModal` + this.props.index).click()
-			// console.log(data)
-			// debugger
-		});
+
+
+
 	}
 
 	render(){

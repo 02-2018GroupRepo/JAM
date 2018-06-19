@@ -40,10 +40,10 @@ public class JobService {
         System.out.println(userEmail);
 		config.emails(userEmail,jobId,Description);
 	}
-	public void updateJob(Long jobId,String description) {
+	public void updateJob(Long jobId) {
 		Job completedJob = jobRepo.findJobById(jobId);
 		completedJob.setCompleted(true);
-		completedJob.setDescription(description);
+
 		jobRepo.save(completedJob);
 		
 	}

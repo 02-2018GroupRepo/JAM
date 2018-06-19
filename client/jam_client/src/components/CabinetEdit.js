@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import url from '../url';
 import {FormGroup, ControlLabel, FormControl, Button, Glyphicon} from 'react-bootstrap';
+import swal from 'sweetalert';
 
 class CabinetEdit extends Component{
 
@@ -61,27 +62,45 @@ class CabinetEdit extends Component{
 		const screws = document.getElementById(`cabinetScrews${this.props.index}`).value;
 		// debugger
 		// console.log()
-		const updateCabinet = axios({
-			method: "POST",
-			url: url.url + "edit/cabinet",
-			data:{
-				id,
-				job,
-				type,
-				color,
-				height,
-				width,
-				quantity,
-				hinges,
-				screws
+
+		swal({
+			title: "Edit Cabinet?",
+			text: "Are you sure you want to save changes",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willEdit) => {
+			if (willEdit) {
+				const updateCabinet = axios({
+					method: "POST",
+					url: url.url + "edit/cabinet",
+					data:{
+						id,
+						job,
+						type,
+						color,
+						height,
+						width,
+						quantity,
+						hinges,
+						screws
+					}
+				});
+				updateCabinet.then(data =>{
+					// console.log(data)
+					this.props.updateCabinet(data);
+					document.getElementById(`cabinetModal` + this.props.index).click()
+					// console.log(data)
+					// debugger
+				});
+				swal("Your cabinet has been edited!", {
+					icon: "success",
+				});
+			} 
+			else {
+				swal("Your cabinet is unchanged!");
 			}
-		});
-		updateCabinet.then(data =>{
-			// console.log(data)
-			this.props.updateCabinet(data);
-			document.getElementById(`cabinetModal` + this.props.index).click()
-			// console.log(data)
-			// debugger
 		});
 	}
 

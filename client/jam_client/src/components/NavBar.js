@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import Logout from './Logout';
-import{Navbar, Nav} from 'react-bootstrap';
+import{Navbar, Nav, Button, NavItem} from 'react-bootstrap';
 class NavBar extends Component{
 
 
@@ -28,9 +28,11 @@ class NavBar extends Component{
 			  		?
 			  		<span></span>
 			  		:
-			  		<Nav pullRight>
-			  			<Logout />
-			  		</Nav>
+			  		<span>
+			  			<Nav pullRight>
+			  				<Logout />
+			  			</Nav>
+			  		</span>
 			  	}
 			  </Navbar.Collapse>
 			</Navbar>			

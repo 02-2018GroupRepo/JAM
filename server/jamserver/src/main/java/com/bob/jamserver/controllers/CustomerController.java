@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @CrossOrigin
 @RestController
 public class CustomerController {
@@ -18,5 +19,6 @@ public class CustomerController {
     public Customer createCustomer(@RequestBody Customer customer){
         System.out.println("got to customer controller "+customer.getLast_name()+customer.getFirst_name());
         return  customerService.createCustomer(customer);
+
     }
 }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import url from '../url';
 import {FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
+import swal from 'sweetalert';
 
 class Window extends Component{
   constructor(props){
@@ -45,6 +46,9 @@ class Window extends Component{
     })
     windowCreate.then(data=>{
       this.props.updateWindow(data);
+      swal("Window has been added!", {
+          icon: "success",
+      });
 
       // console.log("YOO")
     })
@@ -96,15 +100,17 @@ class Window extends Component{
                       <FormControl type="number" step="0.1" placeholder="0" id="window_width" min="0" />
                     </FormGroup>
                   </div>
-                  <div className="col-md-3">
-                      <FormGroup bsSize="large">
-                        <ControlLabel>Quantity</ControlLabel>
-                        <FormControl type="number" placeholder="1" id="window_quantity" min="1" />
-                    </FormGroup>
-                  </div>
                 </div>
+              </div>
+              <div className="col-md-6">
+                <div className="col-md-3">
+                    <FormGroup bsSize="large">
+                      <ControlLabel>Quantity</ControlLabel>
+                  <FormControl type="number" placeholder="1" id="window_quantity" min="1" onChange={this.handleQuantity} />
+                </FormGroup>
                 <Button type="submit" bsStyle="primary">Submit</Button>
               </div>
+            </div>
             </form>
         </div>
       </div>

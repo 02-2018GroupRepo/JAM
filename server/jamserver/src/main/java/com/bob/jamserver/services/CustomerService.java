@@ -13,4 +13,10 @@ public class CustomerService {
     public Customer createCustomer(Customer customer){
         return customerRepository.save(customer);
     }
+
+    public Customer findByEmail(String email){
+        Customer customer = customerRepository.findByEmail(email);
+        return customer;
+    }
+
 }

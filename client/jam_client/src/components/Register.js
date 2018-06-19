@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import url from '../url';
+import swal from 'sweetalert';
 
 class Register extends Component{
   constructor(){
@@ -41,10 +42,16 @@ class Register extends Component{
       if(registerData.data === "registerSuccess"){
 
         localStorage.setItem('token',registerData.data.token)
-        this.props.history.push('/')
+        swal("Registered Successfully!", {
+          icon: "success",
+        });
+        this.props.history.push('/jobs')
       }else{
-        console.log("Unsuccessful");
-        console.log(registerData.data)
+        swal("Unable to Register!", {
+          icon: "danger",
+        });
+        // console.log("Unsuccessful");
+        // console.log(registerData.data)
 
       }
     })

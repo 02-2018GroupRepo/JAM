@@ -3,6 +3,7 @@ import axios from 'axios';
 import url from '../url';
 import {Link} from 'react-router-dom';
 import SingleJob from './SingleJob';
+import {Button, ButtonToolbar} from 'react-bootstrap';
 
 class Jobs extends Component{
 	constructor(){
@@ -24,7 +25,6 @@ class Jobs extends Component{
 			}
 		});
 		getToken.then((jobData)=>{
-			// setTimeout(300);
 			// debugger
 			// console.log(jobData)
 			 // console.log("are there jobss",jobData.data);
@@ -56,9 +56,9 @@ class Jobs extends Component{
 		const email = document.getElementById("email").value;
 		const time = document.getElementById("date").value.toString();
 		const description = document.getElementById("description").value;
-		console.log("git hererere")
-		console.log(first_name);
-		console.log(last_name);
+// 		console.log("git hererere")
+// 		console.log(first_name);
+// 		console.log(last_name);
 		const jobRequest = axios({
 			method:"POST",
 			url:url.url + "create/customer",
@@ -90,8 +90,20 @@ class Jobs extends Component{
 				completed
 			}
 			})
-		})
 
+		})
+		jobRequest.then((newJobData)=>{
+				console.log(newJobData);
+			axios({
+				method:"POST",
+				url:url.url+ "create/job",
+				data:{
+					customer_id:newJobData.id,
+					user:this.state.user
+				}
+			})
+
+			})
 	}
 
 
@@ -130,12 +142,15 @@ class Jobs extends Component{
 		
 		return(
 			<div className="container2 main-jobs">
+				<ButtonToolbar>
+			  		<Button bsStyle="primary" bsSize="large">Assigned Jobs</Button>
+			  		<Button bsStyle="success" bsSize="large">Completed Jobs</Button>	
+				</ButtonToolbar>
 				<div className="jobs-list">
 					<ul className="row">
 						{jobs}
 					</ul>
 				</div>
-
 				
                
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -194,7 +209,6 @@ class Jobs extends Component{
     </div>
   </div>
 </div>
-				
 			</div>
 			
 		)

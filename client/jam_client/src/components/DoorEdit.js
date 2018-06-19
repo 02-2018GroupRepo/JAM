@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import url from '../url';
 import {FormGroup, ControlLabel, FormControl, Button, Glyphicon} from 'react-bootstrap';
+import swal from 'sweetalert';
 
 class DoorEdit extends Component{
 
@@ -41,28 +42,45 @@ class DoorEdit extends Component{
 	    const quantity = document.getElementById(`doorQuantity${this.props.index}`).value;
 	    const hinges = document.getElementById(`doorHinges${this.props.index}`).value;
 	    const screws = document.getElementById(`doorScrews${this.props.index}`).value;
-    
-		const updateDoor = axios({
-			method: "POST",
-			url: url.url + "edit/door",
-			data:{
-				id,
-				job,
-				type,
-				color,
-				height,
-				width,
-				quantity,
-				hinges,
-				screws
+
+	    swal({
+			title: "Edit Door?",
+			text: "Are you sure you want to save changes",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willEdit) => {
+			if (willEdit) {
+				const updateDoor = axios({
+					method: "POST",
+					url: url.url + "edit/door",
+					data:{
+						id,
+						job,
+						type,
+						color,
+						height,
+						width,
+						quantity,
+						hinges,
+						screws
+					}
+				});
+			updateDoor.then(data =>{
+				console.log(data)
+				this.props.updateDoor(data);
+				document.getElementById(`doorModal` + this.props.index).click()
+				// console.log(data)
+				// debugger
+			});
+				swal("Your door has been edited!", {
+					icon: "success",
+				});
+			} 
+			else {
+				swal("Your door is unchanged!");
 			}
-		});
-		updateDoor.then(data =>{
-			console.log(data)
-			this.props.updateDoor(data);
-			document.getElementById(`doorModal` + this.props.index).click()
-			// console.log(data)
-			// debugger
 		});
 	}
 
