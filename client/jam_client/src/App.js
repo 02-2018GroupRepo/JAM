@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import SingleJob from './components/SingleJob';
 import Door from './components/Door';
 import Logout from './components/Logout';
+import CompleteJobs from './components/CompleteJobs';
 import './style.css';
 import './App.css';
 
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact path = "/jobs" component={Jobs} />
           <Route path="/job/:job_id" component={SingleJob} />
           <Route exact path = "/logout" component={Logout} />    
+          <Route exact path="/complete/:job_id" component={CompleteJobs} />
         </div>
       </BrowserRouter>
     );

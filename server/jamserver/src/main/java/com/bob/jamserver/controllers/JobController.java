@@ -1,14 +1,12 @@
 package com.bob.jamserver.controllers;
 
-import com.bob.jamserver.model.Job;
-import com.bob.jamserver.model.User;
-import com.bob.jamserver.services.CustomerService;
-import com.bob.jamserver.services.JobService;
-import com.bob.jamserver.services.UserService;
+import com.bob.jamserver.model.*;
+import com.bob.jamserver.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -21,18 +19,30 @@ public class JobController{
 	UserService userService;
 
 	@Autowired
+	CabinetService cabinetService;
+
+	@Autowired
+	WindowService windowService;
+
+	@Autowired
+	DoorService doorService;
+
+	@Autowired
 	CustomerService customerService;
 
 	@RequestMapping(value="/create/job", method = RequestMethod.POST)
-	public List<Job> create(@RequestBody  Job job){
+	public HashMap<String, List<Job>> create(@RequestBody  Job job){
 		System.out.println("is customer id null "+job.getCustomer().getId());
 		Job jobcreated = jobService.createJob(job);
 
 		Long userId = jobcreated.getUser().getId();
 		System.out.println("USER ID:" + userId);
 		List<Job> uncompletedJobs = jobService.jobsTodo(userId);
-
-		return uncompletedJobs;
+		List<Job> completedJobs = jobService.jobsDone(userId);
+		HashMap<String, List<Job>> allJobs = new HashMap<String, List<Job>>();
+		allJobs.put("completed",completedJobs);
+		allJobs.put("uncompleted",uncompletedJobs);
+		return allJobs;
 
 	}
 	@RequestMapping(value="/customer", method=RequestMethod.POST)
@@ -62,4 +72,23 @@ public class JobController{
 
 
 	}
+
+	@RequestMapping(value="/complete/job", method=RequestMethod.POST)
+	public HashMap<String,List> getSingleJob(@RequestBody Job job){
+		System.out.println("getting single job "+ job.getId());
+		List<Door> doors = doorService.getDoorsForJob(job.getId());
+
+		List<Window> windows = windowService.getWindowsForJob(job.getId());
+
+		List<Cabinet> cabinets = cabinetService.getCabinetsForJob(job.getId());
+
+		HashMap<String, List> jobProperties = new HashMap<String, List>();
+		jobProperties.put("doors", doors);
+		jobProperties.put("windows", windows);
+		jobProperties.put("cabinets",cabinets);
+		System.out.println("how many doors "+jobProperties.get("doors").size());
+		return  jobProperties;
+
+	}
+
 }

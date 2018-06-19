@@ -9,12 +9,16 @@ class Jobs extends Component{
 	constructor(){
 		super();
 		this.state={
-			jobs: [""],
+			completedJobs: [""],
+			uncompletedJobs: [""],
 			user:"",
-			token: localStorage.getItem('token')
+			token: localStorage.getItem('token'),
+			showJobs: false
 		}
 		this.handleJob = this.handleJob.bind(this);
 		this.handleClearForm = this.handleClearForm.bind(this);
+		this.showComplete = this.showComplete.bind(this);
+		this.showUncomplete = this.showUncomplete.bind(this);
 	}
 
 	componentDidMount(){
@@ -26,13 +30,14 @@ class Jobs extends Component{
 			}
 		});
 		getToken.then((jobData)=>{
-			// debugger
+		// console.log(jobData.data.completed[0].user);
 			// console.log(jobData)
 			 // console.log("are there jobss",jobData.data);
 			 // console.log(jobData.data[0].customer.id)
 			this.setState({
-				jobs: jobData.data,
-				user : jobData.data[0].user
+				completedJobs: jobData.data.completed,
+				uncompletedJobs: jobData.data.uncompleted,
+				user : jobData.data.completed[0].user
 			})
 		})
 	}
@@ -104,11 +109,25 @@ class Jobs extends Component{
 		document.getElementById("jobForm").reset();
 	}
 
+	showUncomplete(){
+		this.setState({
+			showJobs: false
+		})
+	}
+
+	showComplete(){
+		console.log("YO")
+		this.setState({
+			showJobs: true
+		})
+	}
+
 
 
 	render(){
 		// col-lg-2 col-md-2 col-xl-12 col-sm-4 
-		const jobs = this.state.jobs.map((data, index)=>{
+
+		const Ujobs = this.state.uncompletedJobs.map((data, index)=>{
 			if(data != undefined){
 				const customer = data.customer
 				// console.log(customer.id)
@@ -137,19 +156,54 @@ class Jobs extends Component{
 				)
 			}
 		})
+
+		const Cjobs = this.state.completedJobs.map((data, index)=>{
+			if(data != undefined){
+				const customer = data.customer
+				// console.log(customer.id)
+				return(
+					<li className="col-md-3">
+						<Link to={`/complete/${data.id}`}  >
+							<div id="jumboJob" className="jumbotron">
+								<h3 className="jumboTitle"> Job# {data.id} </h3>
+								<hr />
+								{customer != undefined
+									?
+									<span className="jumboText">
+										<h5>Customer: {customer.last_name}, {customer.first_name}</h5>
+										<h5>Address: {customer.address}</h5>
+										<h5>Phone: {customer.phone}</h5>
+										<h5>Email: {customer.email}</h5>
+										<h5>{this.formatTime(data.time)} </h5>
+										<h5> Description: {data.description} </h5>
+									</span>
+									:
+									<span></span>
+								}
+							</div>
+						</Link>
+					</li>
+				)
+			}
+		})
 		
 		return(
 			<div className="container2 main-jobs">
 				<ButtonToolbar>
-			  		<Button bsStyle="primary" bsSize="large">Assigned Jobs</Button>
-			  		<Button bsStyle="success" bsSize="large">Completed Jobs</Button>	
+			  		<Button bsStyle="primary" bsSize="large" onClick={this.showUncomplete}>Assigned Jobs</Button>
+			  		<Button bsStyle="success" bsSize="large" onClick={this.showComplete}>Completed Jobs</Button>	
 					<Button id="add-job" onClick={this.handleClearForm} bsStyle="primary" data-toggle="modal" data-target="#exampleModal">
 				 		Add a Job
 					</Button>
 				</ButtonToolbar>
 				<div className="jobs-list">
 					<ul className="row">
-						{jobs}
+						{this.state.showJobs
+							?
+							Cjobs
+							:
+							Ujobs
+						}
 					</ul>
 				</div>
 				
@@ -164,7 +218,7 @@ class Jobs extends Component{
 				        </button>
 				      </div>
 				      <div class="modal-body">
-				        			<form id="jobForm"onSubmit={this.handleJob}>
+				        			<form id="jobForm" onSubmit={this.handleJob}>
 				                      <div class="form-group">
 				                        <label for="first_name">Customer First Name:</label>
 				                        <input type="text" class="form-control" id="fname"/>
