@@ -24,7 +24,6 @@ class Jobs extends Component{
 			}
 		});
 		getToken.then((jobData)=>{
-			// setTimeout(300);
 			// debugger
 			// console.log(jobData)
 			 // console.log("are there jobss",jobData.data);
@@ -126,40 +125,6 @@ class Jobs extends Component{
 						{jobs}
 					</ul>
 				</div>
-					<form onSubmit={this.handleJob}>
-					  <div class="form-group">
-					    <label for="first_name">Customer First Name:</label>
-					    <input type="text" class="form-control" id="fname"/>
-					  </div>
-					  <div class="form-group">
-					    <label for="last_name">Customer Last Name:</label>
-					    <input type="text" class="form-control" id="lname"/>
-					  </div>
-					   <div class="form-group">
-					    <label for="email">Customer Email:</label>
-					    <input type="email" class="form-control" id="email"/>
-					  </div>
-					   <div class="form-group">
-					    <label for="address">Address:</label>
-					    <input type="text" class="form-control" id="address"/>
-					  </div>
-					  <div class="form-group">
-					    <label for="phone">Phone:</label>
-					    <input type="text" class="form-control" id="phone"/>
-					  </div>
-					  <div class="form-group">
-					    <label for="description">Description:</label>
-					    <input type="text" class="form-control" id="description"/>
-					  </div>
-					  <div class="form-group">
-					    <label for="date">Date:</label>
-					    <input type="datetime-local" class="form-control" id="date"/>
-					  </div>
-					  
-					  <button type="submit" class="btn btn-default">Submit</button>
-				</form>
-			
-				
 			</div>
 			
 		)

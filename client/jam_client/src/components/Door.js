@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import url from '../url';
 import {FormGroup, ControlLabel, FormControl, NumericInput, Button} from 'react-bootstrap';
+import swal from 'sweetalert';
 
 class Door extends Component{
 	constructor(){
@@ -73,6 +74,9 @@ class Door extends Component{
 		doorCreate.then(data =>{
 			// console.log(data)
 			this.props.updateDoor(data);
+			swal("Door has been added!", {
+					icon: "success",
+			});
 			// console.log(data)
 		})
 
@@ -137,14 +141,16 @@ class Door extends Component{
 	    								<FormControl type="number" placeholder="8" id="door_screws" min="8" />
 	  								</FormGroup>
 	  							</div>
-	  					    	<div className="col-md-4">
-						      		<FormGroup bsSize="large">
-						      			<ControlLabel>Quantity</ControlLabel>
-    									<FormControl type="number" placeholder="1" id="door_quantity" min="1" onChange={this.handleQuantity} />
-  									</FormGroup>
-  								</div>
-								<Button type="submit" bsStyle="primary">Submit</Button>
   							</div>
+						</div>
+			    		<div className="col-md-6">
+			    			<div className="col-md-3">
+			      				<FormGroup bsSize="large">
+			      					<ControlLabel>Quantity</ControlLabel>
+									<FormControl type="number" placeholder="1" id="door_quantity" min="1" onChange={this.handleQuantity} />
+								</FormGroup>
+								<Button type="submit" bsStyle="primary">Submit</Button>
+							</div>
 						</div>
 				    </form>
 				</div>

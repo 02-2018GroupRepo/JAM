@@ -5,6 +5,7 @@ import {Table, Button} from 'react-bootstrap';
 import WindowEdit from './WindowEdit';
 import DoorEdit from './DoorEdit';
 import CabinetEdit from './CabinetEdit';
+import swal from 'sweetalert';
 
 
 class Review extends Component{
@@ -17,64 +18,142 @@ class Review extends Component{
  	}
 
  	deleteWindow(data){
- 		// debugger
+ 		//debugger
+		swal({
+			title: "Are you sure?",
+			text: "Once deleted, you will not be able to recover this record!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+
+				const deleted = axios({
+		 			method: "POST",
+		 			url: url.url +"delete/window",
+		 			data:{
+		 				job: data.job,
+		 				id: data.id,
+		 			}
+				}).then(data=>{
+
+		 			this.props.updateWindow(data);
+		 		})
+
+				swal("Your window has been deleted!", {
+					icon: "success",
+			});
+		} else {
+			swal("Your window is safe!");
+			}
+		});
  		// console.log(data.id)
  		// const window_id = data.id
- 		const deleted = axios({
- 			method: "POST",
- 			url: url.url +"delete/window",
- 			data:{
- 				job: data.job,
- 				id: data.id,
- 			}
- 		}).then(data=>{
- 			this.props.updateWindow(data);
- 		})
+
  	}
 
 
  	submitJob(job){
  		// console.log(job)
  		// console.log(job.user)
- 		const completeJob = axios({
- 			method: "POST",
- 			url: url.url + "completed",
- 			data:{
- 				id: job.id,
- 				user: job.user
- 			}
- 		}).then(data=>{
- 			// console.log(data);
- 		})
- 			this.props.history.push('/jobs');
+
+ 		swal({
+			title: "Submit Job",
+			text: "Are you sure?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willSubmit) => {
+			if (willSubmit) {
+				const completeJob = axios({
+	 				method: "POST",
+	 				url: url.url + "completed",
+	 				data:{
+	 					id: job.id,
+	 					user: job.user
+	 				}
+	 			}).then(data=>{
+	 			// console.log(data);
+					swal("Job Submitted!", {
+						icon: "success",
+					});
+	 				this.props.history.push('/jobs');
+	 			})
+		} else {
+			swal("Your job has not been submitted");
+			}
+		})
+
+
  	}
 
 
- 	 deleteCabinet(data){
- 		const deleted = axios({
- 			method: "POST",
- 			url: url.url +"delete/cabinet",
- 			data:{
- 				job: data.job,
- 				id: data.id
- 			}
- 		}).then(data=>{
- 			this.props.updateCabinet(data);
+	deleteCabinet(data){
+
+		 swal({
+ 			title: "Are you sure?",
+ 			text: "Once deleted, you will not be able to recover this record!",
+ 			icon: "warning",
+ 			buttons: true,
+ 			dangerMode: true,
  		})
+		 .then((willDelete) => {
+			if (willDelete) {
+
+		 		const deleted = axios({
+		 			method: "POST",
+		 			url: url.url +"delete/cabinet",
+		 			data:{
+		 				job: data.job,
+		 				id: data.id
+		 			}
+		 		}).then(data=>{
+		 			this.props.updateCabinet(data);
+		 		})
+
+				swal("Your cabinet has been deleted!", {
+					icon: "success",
+				});
+			} 
+			else {
+					swal("Your cabinet is safe!");
+			}
+		});
  	}
 
- 	 	deleteDoor(data){
- 		const deleted = axios({
- 			method: "POST",
- 			url: url.url +"delete/door",
- 			data:{
- 				job: data.job,
- 				id: data.id
- 			}
- 		}).then(data=>{
- 			this.props.updateDoor(data);
- 		})
+ 	 deleteDoor(data){
+			swal({
+  			title: "Are you sure?",
+  			text: "Once deleted, you will not be able to recover this record!",
+  			icon: "warning",
+  			buttons: true,
+  			dangerMode: true,
+  		})
+ 		.then((willDelete) => {
+ 			if (willDelete) {
+
+	 			const deleted = axios({	
+	 				method: "POST",
+	 				url: url.url +"delete/door",
+	 				data:{
+	 					job: data.job,
+	 					id: data.id
+	 				}
+	 			}).then(data=>{	
+	 				this.props.updateDoor(data);
+	 			})
+				swal("Your door has been deleted!", {
+					icon: "success",
+				});
+			} 
+			else {
+					swal("Your door is safe!");
+			}
+		});
  	}
+
 
 
  	getProducts(){
