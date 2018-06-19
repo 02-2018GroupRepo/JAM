@@ -26,10 +26,10 @@ public class JobController{
 	CustomerService customerService;
 
 	@RequestMapping(value="/create/job", method = RequestMethod.POST)
-	public void create(@RequestBody Customer customer, Job job){
-		customerService.createCustomer(customer);
-		job.setCustomer(customer);
-		jobService.createJob(job);
+	public void create(@RequestBody  Job job){
+		System.out.println("is customer id null "+job.getCustomer().getId());
+		Job jobcreated = jobService.createJob(job);
+		System.out.println(jobcreated);
 		System.out.println("leaving create Job");
 	}
 	@RequestMapping(value="/customer", method=RequestMethod.POST)

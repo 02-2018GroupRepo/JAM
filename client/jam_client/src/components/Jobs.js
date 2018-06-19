@@ -9,6 +9,7 @@ class Jobs extends Component{
 		super();
 		this.state={
 			jobs: [""],
+			user:"",
 			token: localStorage.getItem('token')
 		}
 		this.handleJob = this.handleJob.bind(this);
@@ -29,7 +30,8 @@ class Jobs extends Component{
 			 // console.log("are there jobss",jobData.data);
 			 // console.log(jobData.data[0].customer.id)
 			this.setState({
-				jobs: jobData.data
+				jobs: jobData.data,
+				user : jobData.data[0].user
 			})
 		})
 	}
@@ -54,9 +56,40 @@ class Jobs extends Component{
 		const email = document.getElementById("email").value;
 		const time = document.getElementById("date").value.toString();
 		const description = document.getElementById("description").value;
-
+		console.log("git hererere")
+		console.log(first_name);
+		console.log(last_name);
 		const jobRequest = axios({
-			method:"POST"
+			method:"POST",
+			url:url.url + "create/customer",
+			data:{
+			first_name,
+			last_name,
+			email,
+			phone,
+			address
+		}
+			
+			
+		})
+
+		jobRequest.then((newJobData)=>{
+			console.log("custommmeerrr",newJobData);
+			const customer = newJobData.data;
+			const completed = false;
+			console.log(newJobData.data.id);
+
+			axios({
+				method:"POST",
+				url: url.url + "create/job",
+				data:{
+				customer,
+				user: this.state.user,
+				time,
+				description,
+				completed
+			}
+			})
 		})
 
 	}
@@ -102,8 +135,65 @@ class Jobs extends Component{
 						{jobs}
 					</ul>
 				</div>
-			
-			
+
+				
+               
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Add a Job
+</button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Job</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        			<form onSubmit={this.handleJob}>
+                      <div class="form-group">
+                        <label for="first_name">Customer First Name:</label>
+                        <input type="text" class="form-control" id="fname"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="last_name">Customer Last Name:</label>
+                        <input type="text" class="form-control" id="lname"/>
+                      </div>
+                       <div class="form-group">
+                        <label for="email">Customer Email:</label>
+                        <input type="email" class="form-control" id="email"/>
+                      </div>
+                       <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="text" class="form-control" id="phone"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="description">Description:</label>
+                        <input type="text" class="form-control" id="description"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="datetime-local" class="form-control" id="date"/>
+                      </div>
+                      
+                      <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 				
 			</div>
 			
