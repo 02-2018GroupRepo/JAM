@@ -76,13 +76,13 @@ class Review extends Component{
 	 				}
 	 			}).then(data=>{
 	 			// console.log(data);
-					swal("Job Submitted!", {
+					swal(`The job has been submitted \n` + `Copy sent to: ${job.user.email}`, {
 						icon: "success",
 					});
 	 				this.props.history.push('/jobs');
 	 			})
 		} else {
-			swal("Your job has not been submitted");
+			swal("The job has not been submitted");
 			}
 		})
 
