@@ -31,7 +31,6 @@ class Jobs extends Component{
 			}
 		});
 		getToken.then((jobData)=>{
-			debugger
 		// console.log(jobData.data.completed[0].user);
 			 console.log(jobData)
 			 // console.log("are there jobss",jobData.data);
@@ -39,7 +38,7 @@ class Jobs extends Component{
 			this.setState({
 				completedJobs: jobData.data.completed,
 				uncompletedJobs: jobData.data.uncompleted,
-				user : jobData.data.completed[0].user
+				user : jobData.data.uncompleted[0].user
 			})
 		})
 	}
@@ -113,7 +112,9 @@ class Jobs extends Component{
 			createdJobs.then((jobData)=>{
 				console.log(jobData)
 				this.setState({
-					jobs: jobData.data
+					completedJobs: jobData.data.completed,
+					uncompletedJobs: jobData.data.uncompleted,
+					user: jobData.data.uncompleted[0].user
 				})
 				document.getElementById(`exampleModal`).click()
 
