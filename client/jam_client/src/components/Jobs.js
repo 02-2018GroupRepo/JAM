@@ -9,6 +9,7 @@ class Jobs extends Component{
 		super();
 		this.state={
 			jobs: [""],
+			user:"",
 			token: localStorage.getItem('token')
 		}
 		this.handleJob = this.handleJob.bind(this);
@@ -23,13 +24,13 @@ class Jobs extends Component{
 			}
 		});
 		getToken.then((jobData)=>{
-			// setTimeout(300);
 			// debugger
 			// console.log(jobData)
 			 // console.log("are there jobss",jobData.data);
 			 // console.log(jobData.data[0].customer.id)
 			this.setState({
-				jobs: jobData.data
+				jobs: jobData.data,
+				user : jobData.data[0].user
 			})
 		})
 	}
@@ -54,11 +55,33 @@ class Jobs extends Component{
 		const email = document.getElementById("email").value;
 		const time = document.getElementById("date").value.toString();
 		const description = document.getElementById("description").value;
+		const user = this.state.user;
 
+		console.log(this.state.customer);
 		const jobRequest = axios({
-			method:"POST"
+			method:"POST",
+			url: url.url + "create/customer",
+			data:{
+				first_name,
+				last_name,
+				address,
+				phone,
+				email
+			}
+			
 		})
+		jobRequest.then((newJobData)=>{
+				console.log(newJobData);
+			axios({
+				method:"POST",
+				url:url.url+ "create/job",
+				data:{
+					customer_id:newJobData.id,
+					user:this.state.user
+				}
+			})
 
+			})
 	}
 
 
@@ -102,9 +125,6 @@ class Jobs extends Component{
 						{jobs}
 					</ul>
 				</div>
-			
-			
-				
 			</div>
 			
 		)

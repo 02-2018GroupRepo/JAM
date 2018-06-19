@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import url from '../url';
 import {FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
+import swal from 'sweetalert';
 
 class Cabinet extends Component{
   constructor(){
@@ -64,6 +65,9 @@ class Cabinet extends Component{
     
     cabinetCreate.then(data =>{
       this.props.updateCabinet(data);
+      swal("Cabinet has been added!", {
+          icon: "success",
+      });
     })
   }
 
@@ -124,15 +128,17 @@ class Cabinet extends Component{
                       <FormControl type="number" placeholder="8" id="cabinet_screws" min="4" />
                     </FormGroup>
                   </div>
-                  <div className="col-md-4">
-                      <FormGroup bsSize="large">
-                        <ControlLabel>Quantity</ControlLabel>
-                        <FormControl type="number" placeholder="1" id="cabinet_quantity" min="1" onClick={this.handleQuantity} />
-                      </FormGroup>
-                  </div>
-                  <Button type="submit" bsStyle="primary">Submit</Button>
                 </div>
               </div>
+              <div className="col-md-6">
+                <div className="col-md-3">
+                    <FormGroup bsSize="large">
+                      <ControlLabel>Quantity</ControlLabel>
+                  <FormControl type="number" placeholder="1" id="cabinet_quantity" min="1" onChange={this.handleQuantity} />
+                </FormGroup>
+                <Button type="submit" bsStyle="primary">Submit</Button>
+              </div>
+            </div>
             </form>
         </div>
       </div>
