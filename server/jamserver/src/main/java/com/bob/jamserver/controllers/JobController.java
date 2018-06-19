@@ -24,9 +24,11 @@ public class JobController{
 
 	@RequestMapping(value="/create/job", method = RequestMethod.POST)
 	public void create(@RequestBody  Job job){
-		System.out.println("just ot create Job"+job.getTime());
-		Job jobcreate = jobService.createJob(job);
-		System.out.println("check if Job is null "+jobcreate.getDescription());
+		System.out.println("is customer id null "+job.getCustomer().getId());
+		Job jobcreated = jobService.createJob(job);
+		System.out.println(jobcreated);
+		System.out.println("leaving create Job");
+
 	}
 	@RequestMapping(value="/customer", method=RequestMethod.POST)
 	public Job getCustomerForJob(@RequestBody Job job) {
