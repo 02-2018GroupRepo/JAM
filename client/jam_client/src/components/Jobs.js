@@ -139,14 +139,27 @@ class Jobs extends Component{
 		this.setState({
 			showJobs: false
 		})
-	}
+		const comp = document.getElementById("comJob");
+		comp.classList.remove("active-list")
+		comp.classList.add("inactive-list")
+		const element = document.getElementById("assJob")
+		element.classList.remove("inactive-list")
+		element.classList.add("active-list");	
+		}
 
 	showComplete(){
-		console.log("YO")
+		// console.log("YO")
 		this.setState({
 			showJobs: true
 		})
+		const comp = document.getElementById("assJob");
+		comp.classList.remove("active-list")
+		comp.classList.add("inactive-list")
+		const element = document.getElementById("comJob")
+		element.classList.add("active-list");
+		element.classList.remove("inactive-list")	
 	}
+
 
 
 	render(){
@@ -210,16 +223,19 @@ class Jobs extends Component{
 					</li>
 				)
 			}
+			<h5> No Competed/Submitted Jobs </h5>
 		})
 
 		return(
 			<div className="container2 main-jobs">
 				<ButtonToolbar>
-			  		<Button bsStyle="primary" bsSize="large" onClick={this.showUncomplete}>Assigned Jobs</Button>
-			  		<Button bsStyle="success" bsSize="large" onClick={this.showComplete}>Completed Jobs</Button>
+			  		<Button bsStyle="primary" id="assJob" bsSize="large" onClick={this.showUncomplete} className="active-list">Assigned Jobs</Button>
+			  		<Button bsStyle="success" id="comJob" bsSize="large" onClick={this.showComplete} className="inactive-list">Completed Jobs</Button>
 					<Button id="add-job" onClick={this.handleClearForm} bsStyle="primary" data-toggle="modal" data-target="#exampleModal">
 				 		Add a Job
 					</Button>
+
+
 				</ButtonToolbar>
 				<div className="jobs-list">
 					<ul className="row">

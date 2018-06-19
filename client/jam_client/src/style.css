@@ -172,10 +172,19 @@ a:hover{
 }
 
 
+
+.jumboTitle{
+	margin-top: -20px;
+}
+
+.jumboText{
+	text-align: left;
+}
+
 @media only screen and (max-width: 991px) {
 	.jobs-list{
 		width: 100%;
-		background-image: url(/image_2.jpg);
+		background-image: url(/image_2.jpg);/
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -187,14 +196,10 @@ a:hover{
 		margin: 0;
 		height: 100%;
 	}
-}
-
-.jumboTitle{
-	margin-top: -20px;
-}
-
-.jumboText{
-	text-align: left;
+	
+	.jumboText{
+		text-align: center;
+	}
 }
 
 .btn-toolbar {
@@ -205,4 +210,19 @@ a:hover{
 #add-job{
 	float: right;
 	margin-right: 5px;
+}
+
+@media only screen and (max-width: 470px) {
+	#add-job{
+		float:none;
+		margin: 5px;
+	}
+}
+
+.active-list{
+	opacity: 1.0;
+}
+
+.inactive-list{
+	opacity: 0.5;
 }
