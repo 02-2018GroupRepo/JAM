@@ -71,29 +71,29 @@ class Register extends Component{
             <label htmlFor="first-name" className="loginRegisterLabel">First Name:</label>
 
 
-            <input type="text" className="form-control" id="fname" placeholder="First Name" />
+            <input type="text" className="form-control" id="fname" placeholder="First Name" name="fname" required/>
           </div>
           <div className="form-group">
             <label htmlFor="last-name" className="loginRegisterLabel">Last Name:</label>
 
-            <input type="text" className="form-control" id="lname" placeholder="Last Name" />
+            <input type="text" className="form-control" id="lname" placeholder="Last Name" name="lname" required/>
 
           </div>
           <div className="form-group">
             <label htmlFor="email" className="loginRegisterLabel">Email address:</label>
-            <input type="email" className="form-control" id="email" placeholder="example@gmail.com"/>
+            <input type="email" className="form-control" id="email" placeholder="example@gmail.com" name="email" required/>
           </div>
           <div className="form-group">
             <label htmlFor="pwd" className="loginRegisterLabel">Password:</label>
 
-            <input type="password" className="form-control" id="pwd" placeholder="Password" />
+            <input type="password" className="form-control" id="pwd" placeholder="Password" name="password" required/>
           </div>
           <button type="submit" className="btn btn-primary">Register</button>
         </form>
       </div>
       </div>
-   
-    ) 
+
+    )
   }
 }
 

@@ -37,7 +37,7 @@ class WindowEdit extends Component{
 		const quantity = document.getElementById(`windowQuantity${this.props.index}`).value;
 		const color = document.getElementById(`windowColor${this.props.index}`).value;
 		const type = document.getElementById(`windowType${this.props.index}`).value;
-		
+
 		swal({
 			title: "Edit Cabinet?",
 			text: "Are you sure you want to save changes",
@@ -70,14 +70,11 @@ class WindowEdit extends Component{
 				swal("Your cabinet has been edited!", {
 					icon: "success",
 				});
-			} 
+			}
 			else {
 				swal("Your cabinet is unchanged!");
 			}
 		});
-
-
-
 	}
 
 	render(){
@@ -89,7 +86,7 @@ class WindowEdit extends Component{
 		return(
 			<span>
 				<span data-toggle="modal" data-target={`#windowModal${this.props.index}`} id="editing" >
-					<Glyphicon glyph="edit" /> 
+					<Glyphicon glyph="edit" />
 				</span>
 
 				<div className="modal fade" id={`windowModal${this.props.index}`} role="dialog">

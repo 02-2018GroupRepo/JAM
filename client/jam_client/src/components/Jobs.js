@@ -4,6 +4,7 @@ import url from '../url';
 import {Link} from 'react-router-dom';
 import SingleJob from './SingleJob';
 import {Button, ButtonToolbar} from 'react-bootstrap';
+import swal from 'sweetalert';
 
 class Jobs extends Component{
 	constructor(){
@@ -30,8 +31,9 @@ class Jobs extends Component{
 			}
 		});
 		getToken.then((jobData)=>{
+			debugger
 		// console.log(jobData.data.completed[0].user);
-			// console.log(jobData)
+			 console.log(jobData)
 			 // console.log("are there jobss",jobData.data);
 			 // console.log(jobData.data[0].customer.id)
 			this.setState({
@@ -83,7 +85,19 @@ class Jobs extends Component{
 			const completed = false;
 			// console.log(newJobData.data.id);
 
+			swal({
+				title: "Add a Job",
+				text: "Are you sure you want to create a job",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+
+			.then((willAdd) => {
+  			if (willAdd) {
+
 			const createdJobs =axios({
+
 				method:"POST",
 				url: url.url + "create/job",
 				data:{
@@ -93,17 +107,28 @@ class Jobs extends Component{
 					description,
 					completed
 				}
+
 			})
+
 			createdJobs.then((jobData)=>{
 				console.log(jobData)
 				this.setState({
 					jobs: jobData.data
 				})
 				document.getElementById(`exampleModal`).click()
-				
-			})		
-		})
-	}
+
+			});
+
+    		swal("You have created a new job", {
+      	icon: "success",
+					});
+				}else {
+    				swal("You have not created a new job");
+  				}
+		});
+
+	})
+ }
 
 	handleClearForm(event){
 		document.getElementById("jobForm").reset();
@@ -123,9 +148,8 @@ class Jobs extends Component{
 	}
 
 
-
 	render(){
-		// col-lg-2 col-md-2 col-xl-12 col-sm-4 
+		// col-lg-2 col-md-2 col-xl-12 col-sm-4
 
 		const Ujobs = this.state.uncompletedJobs.map((data, index)=>{
 			if(data != undefined){
@@ -186,12 +210,12 @@ class Jobs extends Component{
 				)
 			}
 		})
-		
+
 		return(
 			<div className="container2 main-jobs">
 				<ButtonToolbar>
 			  		<Button bsStyle="primary" bsSize="large" onClick={this.showUncomplete}>Assigned Jobs</Button>
-			  		<Button bsStyle="success" bsSize="large" onClick={this.showComplete}>Completed Jobs</Button>	
+			  		<Button bsStyle="success" bsSize="large" onClick={this.showComplete}>Completed Jobs</Button>
 					<Button id="add-job" onClick={this.handleClearForm} bsStyle="primary" data-toggle="modal" data-target="#exampleModal">
 				 		Add a Job
 					</Button>
@@ -206,7 +230,7 @@ class Jobs extends Component{
 						}
 					</ul>
 				</div>
-				
+
 
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
@@ -221,33 +245,33 @@ class Jobs extends Component{
 				        			<form id="jobForm" onSubmit={this.handleJob}>
 				                      <div class="form-group">
 				                        <label for="first_name">Customer First Name:</label>
-				                        <input type="text" class="form-control" id="fname"/>
+				                        <input type="text" class="form-control" id="fname" name="fname" required/>
 				                      </div>
 				                      <div class="form-group">
 				                        <label for="last_name">Customer Last Name:</label>
-				                        <input type="text" class="form-control" id="lname"/>
+				                        <input type="text" class="form-control" id="lname" name="lname" required/>
 				                      </div>
 				                       <div class="form-group">
 				                        <label for="email">Customer Email:</label>
-				                        <input type="email" class="form-control" id="email"/>
+				                        <input type="email" class="form-control" id="email" name="email" required/>
 				                      </div>
 				                       <div class="form-group">
 				                        <label for="address">Address:</label>
-				                        <input type="text" class="form-control" id="address"/>
+				                        <input type="text" class="form-control" id="address" name="address" required/>
 				                      </div>
 				                      <div class="form-group">
 				                        <label for="phone">Phone:</label>
-				                        <input type="text" class="form-control" id="phone"/>
+				                        <input type="text" class="form-control" id="phone" name="phone" required/>
 				                      </div>
 				                      <div class="form-group">
 				                        <label for="description">Description:</label>
-				                        <input type="text" class="form-control" id="description"/>
+				                        <input type="text" class="form-control" id="description" name="description" required/>
 				                      </div>
 				                      <div class="form-group">
 				                        <label for="date">Date:</label>
-				                        <input type="datetime-local" class="form-control" id="date"/>
+				                        <input type="datetime-local" class="form-control" id="date" name="date" required/>
 				                      </div>
-				                      
+
 				                      <button type="submit" class="btn btn-default">Submit</button>
 				                </form>
 				      		</div>
@@ -257,6 +281,6 @@ class Jobs extends Component{
 			</div>
 		)
 	}
-} 
+}
 
 export default Jobs;

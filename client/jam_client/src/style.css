@@ -36,12 +36,12 @@ label.active{
 	 left: 0;
 	 width: 100vw;
 	 height: 100vh;
-	 background-image: url(/image_1.jpg);    
+	 background-image: url(/image_1.jpg);
 	 background-position: center;
 	 background-repeat: no-repeat;
-	 background-size: cover;  
-	 margin: 0; 
-	 height: 100%; 
+	 background-size: cover;
+	 margin: 0;
+	 height: 100%;
  	overflow: hidden
 }
 
@@ -138,6 +138,7 @@ a:hover{
 
 .navLogo{
 	font-family: 'Bungee Inline', cursive;
+	font-size: 2em;
 }
 
 .main-jobs{
@@ -145,11 +146,11 @@ a:hover{
 	top: 50px;
 	left: 0;
 	width: 100%;
-	background-image: url(/image_2.jpg);    
+	background-image: url(/image_2.jpg);
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: cover;  
-	margin: 0;  
+	background-size: cover;
+	margin: 0;
 	height: 106%;
 }
 .navbar{
@@ -160,10 +161,10 @@ a:hover{
 	padding-right: 20px;
 	padding-top: 20px;
 	width: 100%;
-	background-image: url(/image_2.jpg);    
+	background-image: url(/image_2.jpg);
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: cover;  
+	background-size: cover;
 }
 
 .jobs-list ul{
@@ -174,16 +175,16 @@ a:hover{
 @media only screen and (max-width: 991px) {
 	.jobs-list{
 		width: 100%;
-		background-image: url(/image_2.jpg);    
+		background-image: url(/image_2.jpg);
 		background-position: center;
 		background-repeat: no-repeat;
-		background-size: cover;  
+		background-size: cover;
   }
 	.main-jobs{
 
 		left: 0;
-		width: 100%; 
-		margin: 0;  
+		width: 100%;
+		margin: 0;
 		height: 100%;
 	}
 }

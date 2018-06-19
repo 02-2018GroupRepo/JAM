@@ -37,7 +37,7 @@ class Login extends Component{
           console.log("LoginSuccessful");
   		    this.props.history.push('/jobs')
           // console.log(localStorage.token)
-  		} 
+  		}
   		// else {
 
   		// }
@@ -52,30 +52,30 @@ class Login extends Component{
 		<div>
 		<div className="bgbody"></div>
     <div className="container" >
-			
+
 				<form onSubmit={this.handleLogin} className="loginform loginRegisterWindow">
 					<div>
 					<h1 className="loginRegisterH1"> Login </h1>
 							<div className="form-group email login-space">
 								<label htmlFor="email" className="loginRegisterLabel">Email address:</label>
-								<input type="email" className="loginInput" id="email" placeholder="example@gmail.com"/>
+								<input type="email" className="loginInput" id="email" placeholder="example@gmail.com" name="email" required/>
 							</div>
 							<div className="form-group login-space">
 								<label htmlFor="pwd" className="loginRegisterLabel">Password:</label>
-								<input type="password" className="loginInput" id="pwd" placeholder="Password"/>
+								<input type="password" className="loginInput" id="pwd" placeholder="Password" name="password" required/>
 							</div>
-						
+
 							<button type="submit" className="btn btn-primary login-space">Submit</button><br/>
 							<div className="newUser">
 								<NavLink to="/register">New User</NavLink><br />
 							</div>
 					</div>
-				</form>	
+				</form>
 
 	 </div>
 	 </div>
-	 
-    ) 
+
+    )
   }
 }
 
