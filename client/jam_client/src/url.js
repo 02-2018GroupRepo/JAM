@@ -1,5 +1,5 @@
 const url = {
-	url:"http://104.196.179.223:8081/"
+	url:"http://localhost:8080/"
 }
 
 module.exports = url;

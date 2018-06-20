@@ -68,7 +68,7 @@ public class JobController{
 		System.out.println("job desc"+ jobDescription);
 		jobService.updateJob(jobId);
 		System.out.println(userEmail);
-//		jobService.emailConfirmation(userEmail,jobId,jobDescription);
+
 
 
 	}

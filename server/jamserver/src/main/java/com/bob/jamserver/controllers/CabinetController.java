@@ -1,5 +1,7 @@
 package com.bob.jamserver.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +18,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class CabinetController {
+	private final Logger logger = LoggerFactory.getLogger(CabinetController.class);
 	
 	@Autowired
 	private CabinetService cabinetService;
@@ -26,7 +29,9 @@ public class CabinetController {
 
 	public HashMap<String, List<Cabinet>> createCabinet(@RequestBody Cabinet cabinet) {
 
+		logger.info("check if cabinet is  null "+cabinet);
 		cabinetService.createCabinet(cabinet);
+		logger.info("Successfully created cabinet");
 		cabinets.put("CabinetCreatedSuccessfully",cabinetService.getCabinetsForJob(cabinet.getJob().getId()));
 		return cabinets ;
 	}

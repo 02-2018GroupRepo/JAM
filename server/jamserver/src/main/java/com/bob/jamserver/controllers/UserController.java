@@ -4,6 +4,8 @@ import com.bob.jamserver.model.Job;
 import com.bob.jamserver.model.User;
 import com.bob.jamserver.services.JobService;
 import com.bob.jamserver.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class UserController {
+	private final Logger logger = LoggerFactory.getLogger(UserController.class);
 	HashMap<String,String> data = new HashMap<String,String>();
 	
 	
@@ -39,7 +42,8 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public HashMap<String,String> userLogin(@Valid @RequestBody User user, BindingResult result) {
-		System.out.println("in login ");
+		logger.info("in login");
+
 		if(result.hasErrors()) {
 			data.put("msg","error");
 			return data;
@@ -49,7 +53,7 @@ public class UserController {
 			if(userService.authenticateUser(user.getEmail(),user.getPassword())) {
 				String token = userService.updateToken(user.getEmail());
 				User currentUser = userService.findByToken(token);
-//				System.out.println("user exists");
+				logger.info("user exists");
 				data.put("token",token);
 				data.put("user", currentUser.getFirst_name());
 
