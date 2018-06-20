@@ -27,11 +27,11 @@ class App extends Component {
            <Jobs history = {props.history}/> 
            )}/>
           <Route path="/job/:job_id" render={(props)=>(
-           <SingleJob history = {props.history}/> 
+           <SingleJob match={props.match} history = {props.history}/> 
            )}/>
           <Route exact path = "/logout" component={Logout} />    
           <Route exact path="/complete/:job_id"  render={(props)=>(
-           <CompleteJobs history = {props.history}/> 
+           <CompleteJobs  match={props.match} history = {props.history}/> 
            )}/>
         </div>
       </BrowserRouter>
