@@ -18,15 +18,21 @@ class App extends Component {
           
       <BrowserRouter>
         <div className="App">
-          <Route path = "/" component={NavBar}/>
+          <Route path = "/" render={(props)=>(
+           <NavBar history = {props.history}/> 
+           )}/>
           <Route exact path = "/" component={Login}/>
           <Route exact path = "/register" component={Register}/>  
           <Route exact path = "/jobs" render={(props)=>(
            <Jobs history = {props.history}/> 
            )}/>
-          <Route path="/job/:job_id" component={SingleJob} />
+          <Route path="/job/:job_id" render={(props)=>(
+           <SingleJob history = {props.history}/> 
+           )}/>
           <Route exact path = "/logout" component={Logout} />    
-          <Route exact path="/complete/:job_id" component={CompleteJobs} />
+          <Route exact path="/complete/:job_id"  render={(props)=>(
+           <CompleteJobs history = {props.history}/> 
+           )}/>
         </div>
       </BrowserRouter>
     );
