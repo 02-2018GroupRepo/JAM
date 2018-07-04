@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import Logout from './Logout';
 import{Navbar, Nav, Button, NavItem} from 'react-bootstrap';
+
 class NavBar extends Component{
-
-
-
 	render(){
 		const userName = localStorage.user;
 		const loggedIn= localStorage.token;
@@ -35,7 +33,7 @@ class NavBar extends Component{
 			  		</span>
 			  	}
 			  </Navbar.Collapse>
-			</Navbar>			
+			</Navbar>
 		)
 	}
 }
