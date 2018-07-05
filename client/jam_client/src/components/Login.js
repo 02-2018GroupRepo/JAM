@@ -58,11 +58,11 @@ class Login extends Component{
 					<h1 className="loginRegisterH1"> Login </h1>
 							<div className="form-group email login-space">
 								<label htmlFor="email" className="loginRegisterLabel">Email address:</label>
-								<input type="email" className="loginInput" id="email" placeholder="example@gmail.com" name="email" required/>
+								<input type="email" className="loginInput" id="email" placeholder="example@gmail.com" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
 							</div>
 							<div className="form-group login-space">
 								<label htmlFor="pwd" className="loginRegisterLabel">Password:</label>
-								<input type="password" className="loginInput" id="pwd" placeholder="Password" name="password" required/>
+								<input type="password" className="loginInput" id="pwd" placeholder="Password" name="password" required />
 							</div>
 
 							<button type="submit" className="btn btn-primary login-space">Submit</button><br/>
