@@ -62,7 +62,7 @@ class Login extends Component{
 							</div>
 							<div className="form-group login-space">
 								<label htmlFor="pwd" className="loginRegisterLabel">Password:</label>
-								<input type="password" className="loginInput" id="pwd" placeholder="Password" name="password" required pattern=".{4,}" title="Four or more characters"/>
+								<input type="password" className="loginInput" id="pwd" placeholder="Password" name="password" required />
 							</div>
 
 							<button type="submit" className="btn btn-primary login-space">Submit</button><br/>
