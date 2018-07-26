@@ -70,23 +70,23 @@ class Register extends Component{
           <div className="form-group">
             <label htmlFor="first-name" className="loginRegisterLabel">First Name:</label>
 
-
-            <input type="text" className="form-control" id="fname" placeholder="First Name" name="fname" required/>
+            <input type="text" className="form-control" id="fname" placeholder="First Name" name="fname" required pattern="[A-Za-z]"/>
+          
           </div>
           <div className="form-group">
             <label htmlFor="last-name" className="loginRegisterLabel">Last Name:</label>
-
-            <input type="text" className="form-control" id="lname" placeholder="Last Name" name="lname" required/>
+            <input type="text" className="form-control" id="lname" placeholder="Last Name" name="lname" required pattern="[A-Za-z]"/>
+      
 
           </div>
           <div className="form-group">
             <label htmlFor="email" className="loginRegisterLabel">Email address:</label>
-            <input type="email" className="form-control" id="email" placeholder="example@gmail.com" name="email" required/>
+             <input type="email" className="form-control" id="email" placeholder="example@gmail.com" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
+
           </div>
           <div className="form-group">
             <label htmlFor="pwd" className="loginRegisterLabel">Password:</label>
-
-            <input type="password" className="form-control" id="pwd" placeholder="Password" name="password" required/>
+             <input type="password" className="form-control" id="pwd" placeholder="Password" name="password" required pattern=".{4,}" title="Four or more characters"/>
           </div>
           <button type="submit" className="btn btn-primary">Register</button>
         </form>

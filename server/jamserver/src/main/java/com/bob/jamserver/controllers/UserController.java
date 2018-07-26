@@ -75,12 +75,17 @@ public class UserController {
 	@RequestMapping(value="/jobs",method=RequestMethod.POST)
 	public  HashMap<String, List<Job>> userJobs(@RequestBody User user) {
 		HashMap<String, List<Job>> empty = new HashMap<String, List<Job>>();
+		logger.info("user token "+user.getToken());
 		if (data.containsValue(user.getToken())) {
 			User empl = userService.findByToken(user.getToken());
 			empl.getId();
+			logger.info("is user id null "+empl.getId());
 			jobService.findUserJobs(empl.getId());
 			List<Job> uncompletedJobs = jobService.jobsTodo(empl.getId());
+
+			logger.info("uncompleted jobs size"+ uncompletedJobs.size());
 			List<Job> completedJobs = jobService.jobsDone(empl.getId());
+			logger.info("completed jobs size "+ completedJobs.size());
 			HashMap<String, List<Job>> allJobs = new HashMap<String, List<Job>>();
 			allJobs.put("uncompleted", uncompletedJobs);
 			allJobs.put("completed",completedJobs);

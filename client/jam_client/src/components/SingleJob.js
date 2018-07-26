@@ -74,7 +74,7 @@ class SingleJob extends Component{
 		// console.log(loggedIn)
 		return(
 			<div className='container'>
-					{loggedIn == undefined
+					{loggedIn === undefined
 						?
 						
 						<h1>Must be logged in</h1>
